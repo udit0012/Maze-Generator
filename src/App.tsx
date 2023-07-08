@@ -1,12 +1,17 @@
 import React from 'react';
 import './App.css';
 import Maze from './components/Maze';
+import { BrowserRouter, Route, Routes } from 'react-router-dom';
 
 function App() {
   return (
-    <div className="App">
-      <Maze />
-    </div>
+    <BrowserRouter>
+      <div className="App">
+        <Routes>
+          <Route path='/' element={<Maze/>} />
+        </Routes>
+      </div>
+    </BrowserRouter>
   );
 }
 
