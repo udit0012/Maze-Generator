@@ -1,0 +1,15 @@
+{
+  "files": {
+    "main.css": "/Maze-Generator/static/css/main.c09cc00a.css",
+    "main.js": "/Maze-Generator/static/js/main.3b2567c9.js",
+    "static/js/787.4f9f685d.chunk.js": "/Maze-Generator/static/js/787.4f9f685d.chunk.js",
+    "index.html": "/Maze-Generator/index.html",
+    "main.c09cc00a.css.map": "/Maze-Generator/static/css/main.c09cc00a.css.map",
+    "main.3b2567c9.js.map": "/Maze-Generator/static/js/main.3b2567c9.js.map",
+    "787.4f9f685d.chunk.js.map": "/Maze-Generator/static/js/787.4f9f685d.chunk.js.map"
+  },
+  "entrypoints": [
+    "static/css/main.c09cc00a.css",
+    "static/js/main.3b2567c9.js"
+  ]
+}
