@@ -1,0 +1,110 @@
+body{
+    background-color: rgb(3, 29, 29);
+    color: aqua;
+}
+.maze{
+    margin: 40px;
+    margin-bottom: 0;
+}
+.head1{
+    text-align: center;
+    font-size: 50px;
+    text-shadow: 0px 0px 10px rgb(0, 209, 209),
+    5px 5px 10px rgb(0, 209, 209);
+}
+.flexContainer{
+}
+.mazeContainer{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+.mazeForm{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+.inputBox{
+    margin: 10px 10px;
+    display: flex;
+    flex-direction: column;
+}
+.inputLabel{
+    margin: 5px 5px;
+    font-size: 18px;
+}
+.inputField{
+    border: 2px solid aqua;
+    color: aqua;
+    background-color: transparent;
+    outline: none;
+    font-size: 20px;
+    padding: 8px 20px;
+    margin: 5px 0;
+    border-radius: 40px;
+}
+.notice{
+    font-size: 36px;
+    letter-spacing: 2px;
+    font-weight: 700;
+    background:linear-gradient(90deg, aqua, rgb(0, 128, 128),aqua
+    );
+    background-clip: text;
+    color: transparent;
+}
+.btn{
+    border: none;
+    background-color: transparent;
+    outline: none;
+    font-size: 20px;
+    padding: 10px;
+    margin: 5px 0;
+    border-radius: 40px;
+    cursor: pointer;
+    transition: .3s;
+}
+.btnOutline{
+    border: 2px solid aqua;
+    color: aqua;
+}
+.btnOutline:hover{
+    font-weight: 600;
+    font-size: 19px;
+    box-shadow: 0 0 10px 2px aqua,
+    0 0 15px 4px rgba(0, 255, 255, 0.74),
+    0 0 30px 8px rgba(0, 255, 255, 0.507);
+    color: black;
+    background-color: aqua;
+}
+.mazeBox{
+    width: 100%;
+    min-height: 400px;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    border-radius: 10px;
+    align-items: center;
+    /* background-color: rgb(41, 4, 4); */
+    padding: 10px;
+}
+.mazeBoxes{
+    border-radius: 5px;
+    border: 3px solid aqua;
+}
+.mazeRow{
+    display: flex;
+}
+.mazeCell{
+    width: 30px;
+    height: 30px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+.mt-10{
+    margin-top: 40px;
+}
+.mx-4{
+    margin-left: 16px;
+    margin-right: 16px;
+}
