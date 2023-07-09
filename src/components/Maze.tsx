@@ -250,7 +250,7 @@ const Maze = () => {
                     </form>
                 </div>
                 <div className='mazeBox mt-10'>
-                    {loading ? <div className='notice'>Select the Grid size (2-20)</div> :error?<div className='notice'>{error}</div>: <div className='mazeBoxes'>
+                    {loading ? <div className='notice'>Select the Maze size (2-20)</div> :error?<div className='notice'>{error}</div>: <div className='mazeBoxes'>
                         {mazeBox.length ? mazeBox.map((grid: gridType[]) => {
                             return <div className='mazeRow'>
                                 {grid.map((cell: gridType) => {

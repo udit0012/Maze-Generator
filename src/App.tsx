@@ -8,7 +8,7 @@ function App() {
     <BrowserRouter>
       <div className="App">
         <Routes>
-          <Route path='/Maze-Generator' element={<Maze/>} />
+          <Route path='/' element={<Maze/>} />
         </Routes>
       </div>
     </BrowserRouter>

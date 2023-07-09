@@ -77,7 +77,7 @@ body{
     background-color: aqua;
 }
 .mazeBox{
-    width: 100%;
+    /* width: 100%; */
     min-height: 400px;
     display: flex;
     flex-direction: column;
@@ -107,4 +107,34 @@ body{
 .mx-4{
     margin-left: 16px;
     margin-right: 16px;
+}
+
+@media only screen and (max-width: 800px){
+    .head1{
+        font-size: 35px;
+    }
+    .mazeForm{
+        flex-direction: column;
+    }
+    .inputField{
+        font-size: 15px;
+        padding: 5px 14px;
+        margin: 3px 0;
+    }
+    .inputLabel{
+        margin: 3px 3px;
+        font-size: 14px;
+    }
+    .btn{
+        font-size: 14px;
+        padding: 6px 10px;
+        margin: 3px 0;
+    }
+    .btnOutline:hover{
+        font-size: 15px;
+    }
+    .mazeCell{
+        width: 15px;
+        height: 15px;
+    }
 }
