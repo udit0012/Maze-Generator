@@ -292,8 +292,9 @@ const Maze = () => {
                 </div>
                 <div className='mazeFlexBox mt-10'>
                     {loading&& <div className='notice'>Select the Maze size (2-20)</div> }
+                    {error&& <div className='notice'>{error}</div> }
                     {!loading && !error && <div className='mazeBox'>
-                        {loading ? <div className='notice'></div> : error ? <div className='notice'>{error}</div> : <div className='mazeBoxes'>
+                        {<div className='mazeBoxes'>
                             {mazeBox.length ? mazeBox.map((grid: gridType[]) => {
                                 return <div className='mazeRow'>
                                     {grid.map((cell: gridType) => {
