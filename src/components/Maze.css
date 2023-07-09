@@ -12,8 +12,6 @@ body{
     text-shadow: 0px 0px 10px rgb(0, 209, 209),
     5px 5px 10px rgb(0, 209, 209);
 }
-.flexContainer{
-}
 .mazeContainer{
     display: flex;
     justify-content: center;
@@ -76,18 +74,24 @@ body{
     color: black;
     background-color: aqua;
 }
-.mazeBox{
+.mazeFlexBox{
     /* width: 100%; */
     min-height: 400px;
     display: flex;
-    flex-direction: column;
     justify-content: center;
     border-radius: 10px;
     align-items: center;
     /* background-color: rgb(41, 4, 4); */
     padding: 10px;
 }
+.mazeBox{
+    width: 50%;
+    display: flex;
+    justify-content: flex-end;
+    align-items: center;
+}
 .mazeBoxes{
+    display: inline-block;
     border-radius: 5px;
     border: 3px solid aqua;
 }
@@ -100,6 +104,62 @@ body{
     display: flex;
     justify-content: center;
     align-items: center;
+}
+.controllers{
+    margin: 30px 0;
+    width: 50%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+.controlBox{
+    margin: 0 70px;
+    display: grid;
+    /* grid-template-columns: 40px 40px 40px; */
+    /* grid-template-columns: 60px ; */
+    grid-gap: 15px;
+    grid-template-areas: "blank1 top blank2"
+    "left bottom right";
+}
+.moves{
+    margin: 20px 70px;
+}
+.btnControl{
+    color:aqua;
+    border: 1px solid aqua;
+    border-radius: 5px;
+}
+.material-symbols-outlined{
+    font-size: 70px;
+}
+.btnControl:hover{
+    background-color: aqua;
+    color:black;
+    box-shadow: 0 0 10px 2px aqua,
+    0 0 15px 4px rgba(0, 255, 255, 0.74),
+    0 0 30px 8px rgba(0, 255, 255, 0.507);
+}
+.blank1{
+    border: none;
+    color: transparent;
+    grid-area: blank1;
+}
+.blank2{
+    border: none;
+    color: transparent;
+    grid-area: blank2;
+}
+.left{
+    grid-area: left;
+}
+.right{
+    grid-area: right;
+}
+.bottom{
+    grid-area: bottom;
+}
+.top{
+    grid-area: top;
 }
 .mt-10{
     margin-top: 40px;

@@ -13,11 +13,12 @@ type gridType = {
     top: boolean;
     bottom: boolean;
     visited: boolean;
+    path:boolean;
 }
 
 interface AppState {
     loading: boolean;
-    iMazeBox:gridType[][]
+    iMazeBox: gridType[][]
     mazeBox: gridType[][];
     error: string
 }
@@ -67,9 +68,9 @@ const reducer = (state: AppState, action: AppAction): AppState => {
 const Maze = () => {
     const initialInput: InputType = { row: 1, col: 1 }
     const [input, setInput] = React.useState<InputType>(initialInput);
-    const [{ loading, error, mazeBox,iMazeBox }, dispatch] = useReducer(reducer, {
+    const [{ loading, error, mazeBox, iMazeBox }, dispatch] = useReducer(reducer, {
         loading: true,
-        mazeBox:[],
+        mazeBox: [],
         iMazeBox: [[{
             x: 0,
             y: 0,
@@ -77,17 +78,30 @@ const Maze = () => {
             right: false,
             top: false,
             bottom: false,
-            visited: false
+            visited: false,
+            path:false
         }]],
         error: "",
     })
+    const [current, setCurrent] = useState<gridType>({
+        x: 0,
+        y: 0,
+        left: false,
+        right: false,
+        top: false,
+        bottom: false,
+        visited: false,
+        path:false
+    })
+    const [moves, setMoves] = useState(0)
     const createAMaze = (e: React.FormEvent<HTMLFormElement>) => {
         e.preventDefault()
-        dispatch({type:ActionType.FAIL,payload:""}) 
+        dispatch({ type: ActionType.FAIL, payload: "" })
         dispatch({ type: ActionType.FETCH })
-        if(input.row<2 || input.col<2 || input.row>20 || input.col>20) {dispatch({type:ActionType.FAIL,payload:"Not Possible"})
-    }
-        dispatch({type:ActionType.REGENERATE,payload1:[]})
+        if (input.row < 2 || input.col < 2 || input.row > 20 || input.col > 20) {
+            dispatch({ type: ActionType.FAIL, payload: "Not Possible" })
+        }
+        dispatch({ type: ActionType.REGENERATE, payload1: [] })
         try {
             let maze: gridType[][] = []
             for (let i = 0; i < input.row; i++) {
@@ -100,7 +114,8 @@ const Maze = () => {
                         right: false,
                         top: false,
                         bottom: false,
-                        visited: false
+                        visited: false,
+                        path:false
                     }
                     rows.push(obj)
                 }
@@ -111,9 +126,11 @@ const Maze = () => {
                 let copyMaze = deepCopyArray(maze)
                 let startcell = copyMaze[0][0];
                 let maze1: gridType[][] = DFS(startcell, copyMaze)
-                dispatch({type:ActionType.REGENERATE,payload1:maze1})
+                dispatch({ type: ActionType.REGENERATE, payload1: maze1 })
+                setCurrent(maze1[0][0])
+                setMoves(0);
             } catch (error) {
-                dispatch({type:ActionType.FAIL,payload:"I Not Possible"})
+                dispatch({ type: ActionType.FAIL, payload: "I Not Possible" })
             }
             // dispatch({ type: ActionType.REGENERATE, payload: maze })
         } catch (error) {
@@ -126,41 +143,41 @@ const Maze = () => {
             const j = Math.floor(Math.random() * (i + 1));
             [directions[i], directions[j]] = [directions[j], directions[i]];
         }
-        
+
         return directions;
     };
-    function deepCopyArray(originalArray:gridType[][]) {
-        const copiedArray:gridType[][] = [];
-      
+    function deepCopyArray(originalArray: gridType[][]) {
+        const copiedArray: gridType[][] = [];
+
         for (let i = 0; i < originalArray.length; i++) {
-          const innerArray = originalArray[i];
-          const copiedInnerArray = [];
-      
-          for (let j = 0; j < innerArray.length; j++) {
-            const originalObject = innerArray[j];
-            const copiedObject = Object.assign({},originalObject);
-      
-            copiedInnerArray.push(copiedObject);
-          }
-      
-          copiedArray.push(copiedInnerArray);
+            const innerArray = originalArray[i];
+            const copiedInnerArray = [];
+
+            for (let j = 0; j < innerArray.length; j++) {
+                const originalObject = innerArray[j];
+                const copiedObject = Object.assign({}, originalObject);
+
+                copiedInnerArray.push(copiedObject);
+            }
+
+            copiedArray.push(copiedInnerArray);
         }
-      
+
         return copiedArray;
-      }
-    const generateMaze = () => {
-        dispatch({type:ActionType.FAIL,payload:""}) 
-        dispatch({ type: ActionType.FETCH })
-        if(input.row<2 || input.col<2|| input.row>25 || input.col>25) {dispatch({type:ActionType.FAIL,payload:"Not Possible"})}
-        try {
-            let copyMaze = deepCopyArray(iMazeBox)
-            let startcell = copyMaze[0][0];
-            let maze1: gridType[][] = DFS(startcell, copyMaze)
-            dispatch({type:ActionType.REGENERATE,payload1:maze1})
-        } catch (error) {
-            dispatch({type:ActionType.FAIL,payload:"Not Possible"})
-        }
     }
+    // const generateMaze = () => {
+    //     dispatch({ type: ActionType.FAIL, payload: "" })
+    //     dispatch({ type: ActionType.FETCH })
+    //     if (input.row < 2 || input.col < 2 || input.row > 25 || input.col > 25) { dispatch({ type: ActionType.FAIL, payload: "Not Possible" }) }
+    //     try {
+    //         let copyMaze = deepCopyArray(iMazeBox)
+    //         let startcell = copyMaze[0][0];
+    //         let maze1: gridType[][] = DFS(startcell, copyMaze)
+    //         dispatch({ type: ActionType.REGENERATE, payload1: maze1 })
+    //     } catch (error) {
+    //         dispatch({ type: ActionType.FAIL, payload: "Not Possible" })
+    //     }
+    // }
     const DFS = (currentCell: gridType, mazebox: gridType[][]) => {
         let { x, y } = currentCell
         currentCell.visited = true
@@ -203,23 +220,23 @@ const Maze = () => {
                 if (wallProperty === 'left') {
                     currentCell.left = true
                     nextCell.right = true
-                    if(x===0 && y===0){ console.log("cell left",nextCell,"current cell",currentCell)};
+                    if (x === 0 && y === 0) { console.log("cell left", nextCell, "current cell", currentCell) };
                 }
                 else if (wallProperty === 'right') {
                     currentCell.right = true
                     nextCell.left = true
-                    if(x===0 && y===0){ console.log("cell right",nextCell,"current cell",currentCell)};
-                    
+                    if (x === 0 && y === 0) { console.log("cell right", nextCell, "current cell", currentCell) };
+
                 }
                 else if (wallProperty === 'bottom') {
                     currentCell.bottom = true
                     nextCell.top = true
-                    if(x===0 && y===0){ console.log("cell bottom",nextCell,"current cell",currentCell)};
+                    if (x === 0 && y === 0) { console.log("cell bottom", nextCell, "current cell", currentCell) };
                 }
                 else if (wallProperty === 'top') {
                     currentCell.top = true
                     nextCell.bottom = true
-                    if(x===0 && y===0){ console.log("cell top",nextCell,"current cell",currentCell)};
+                    if (x === 0 && y === 0) { console.log("cell top", nextCell, "current cell", currentCell) };
                 }
                 DFS(nextCell, mazebox)
             }
@@ -229,9 +246,33 @@ const Maze = () => {
     const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
         setInput({ ...input, [e.target.name]: e.target.value })
     }
-    console.log("initial",iMazeBox);
-    console.log("current",mazeBox);
-    
+    const moveLeft = () => {
+        if (current?.y > 0 && current.left) {
+            setMoves(moves + 1)
+            setCurrent(mazeBox[current.x][current.y - 1])
+        }
+    }
+    const moveTop = () => {
+        if (current?.x > 0 && current.top) {
+            setMoves(moves + 1)
+            setCurrent(mazeBox[current.x - 1][current.y])
+        }
+    }
+    const moveBottom = () => {
+        if (current?.x < input.row - 1 && current.bottom) {
+            setMoves(moves + 1)
+            setCurrent(mazeBox[current.x + 1][current.y])
+        }
+    }
+    const moveRight = () => {
+        if (current?.y < input.col - 1 && current.right) {
+            setMoves(moves + 1)
+            setCurrent(mazeBox[current.x][current.y + 1])
+        }
+    }
+    console.log("initial", iMazeBox);
+    console.log("current", mazeBox);
+
     return (
         <div className='maze'>
             <h1 className='head1'>Maze Generator</h1>
@@ -246,24 +287,55 @@ const Maze = () => {
                             <label htmlFor="row" className='inputLabel'>Enter no. of col</label>
                             <input className='inputField' type="text" name='col' value={input.col} onChange={handleChange} />
                         </div>
-                        <button className='btn btnOutline mt-10 mx-4' type="submit" >{mazeBox.length?"Re-g":"G"}enerate Maze</button>
+                        <button className='btn btnOutline mt-10 mx-4' type="submit" >{mazeBox.length ? "Re-g" : "G"}enerate Maze</button>
                     </form>
                 </div>
-                <div className='mazeBox mt-10'>
-                    {loading ? <div className='notice'>Select the Maze size (2-20)</div> :error?<div className='notice'>{error}</div>: <div className='mazeBoxes'>
-                        {mazeBox.length ? mazeBox.map((grid: gridType[]) => {
-                            return <div className='mazeRow'>
-                                {grid.map((cell: gridType) => {
-                                    return <div className='mazeCell' style={{ borderLeft: `${cell.left ? "1px solid transparent" : "1px solid aqua"}`, borderRight: `${cell.right ? "1px solid transparent" : "1px solid aqua"}`, borderBottom: `${cell.bottom ? "1px solid transparent" : "1px solid aqua"}`, borderTop: `${cell.top ? "1px solid transparent" : "1px solid aqua"}` }}>{cell.x===0 && cell.y===0 ? "S":""}{cell.x===input.row-1 && cell.y===input.col-1 ? "E":""}</div>
-                                })}
-                            </div>
-                        }):iMazeBox.map((grid: gridType[]) => {
-                            return <div className='mazeRow'>
-                                {grid.map((cell: gridType) => {
-                                    return <div className='mazeCell' style={{ borderLeft: `${cell.left ? "1px solid transparent" : "1px solid aqua"}`, borderRight: `${cell.right ? "1px solid transparent" : "1px solid aqua"}`, borderBottom: `${cell.bottom ? "1px solid transparent" : "1px solid aqua"}`, borderTop: `${cell.top ? "1px solid transparent" : "1px solid aqua"}` }}></div>
-                                })}
-                            </div>
-                        })}
+                <div className='mazeFlexBox mt-10'>
+                    <div className='mazeBox'>
+                        {loading ? <div className='notice'>Select the Maze size (2-20)</div> : error ? <div className='notice'>{error}</div> : <div className='mazeBoxes'>
+                            {mazeBox.length ? mazeBox.map((grid: gridType[]) => {
+                                return <div className='mazeRow'>
+                                    {grid.map((cell: gridType) => {
+                                        return <div className='mazeCell' style={{ transition: "1s", background: current.x === cell.x && current.y === cell.y ? "aqua" : "transparent", color: current.x === cell.x && current.y === cell.y ? "black" : "aqua", borderLeft: `${cell.left ? "1px solid transparent" : "1px solid aqua"}`, borderRight: `${cell.right ? "1px solid transparent" : "1px solid aqua"}`, borderBottom: `${cell.bottom ? "1px solid transparent" : "1px solid aqua"}`, borderTop: `${cell.top ? "1px solid transparent" : "1px solid aqua"}` }}>{cell.x === 0 && cell.y === 0 ? "S" : ""}{cell.x === input.row - 1 && cell.y === input.col - 1 ? "E" : ""}</div>
+                                    })}
+                                </div>
+                            }) : iMazeBox.map((grid: gridType[]) => {
+                                return <div className='mazeRow'>
+                                    {grid.map((cell: gridType) => {
+                                        return <div className='mazeCell' style={{ borderLeft: `${cell.left ? "1px solid transparent" : "1px solid aqua"}`, borderRight: `${cell.right ? "1px solid transparent" : "1px solid aqua"}`, borderBottom: `${cell.bottom ? "1px solid transparent" : "1px solid aqua"}`, borderTop: `${cell.top ? "1px solid transparent" : "1px solid aqua"}` }}></div>
+                                    })}
+                                </div>
+                            })}
+                        </div>}
+                    </div>
+                    {!loading && <div className='controllers'>
+                        <div>
+                            {!(current.x === input.row - 1 && current.y === input.col - 1) ? <>
+                                <div className='controlBox'>
+                                    <button className='btn blank1'><span className="material-symbols-outlined">
+                                        arrow_left
+                                    </span></button>
+                                    <button className='btn blank2'><span className="material-symbols-outlined">
+                                        arrow_left
+                                    </span></button>
+                                    <button className='btn btnControl left' onClick={moveLeft}><span className="material-symbols-outlined">
+                                        arrow_left
+                                    </span></button>
+                                    <button className='btn btnControl top' onClick={moveTop}><span className="material-symbols-outlined">
+                                        arrow_drop_up
+                                    </span></button>
+                                    <button className='btn btnControl bottom' onClick={moveBottom}><span className="material-symbols-outlined">
+                                        arrow_drop_down
+                                    </span></button>
+                                    <button className='btn btnControl right' onClick={moveRight}><span className="material-symbols-outlined">
+                                        arrow_right
+                                    </span></button>
+                                </div>
+                                <h2 className='moves'>Moves : {moves}</h2>
+                            </> : <>
+                                <div className='controlBox'><h1>You Win!</h1></div>
+                            </>}
+                        </div>
                     </div>}
                 </div>
             </div>
