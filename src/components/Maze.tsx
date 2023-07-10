@@ -311,7 +311,7 @@ const Maze = () => {
                         </div>}
                     </div>}
                     {!loading && !error && <div className='controllers'>
-                        <div>
+                        <div className='controlFlexBox'>
                             {!(current.x === input.row - 1 && current.y === input.col - 1) ? <>
                                 <div className='controlBox'>
                                     <button className='btn blank1'><span className="material-symbols-outlined">

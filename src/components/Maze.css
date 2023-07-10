@@ -193,8 +193,26 @@ body{
     .btnOutline:hover{
         font-size: 15px;
     }
+    .mazeFlexBox{
+        flex-direction: column;
+    }
+    .mazeBox{
+        justify-content: center;
+    }
     .mazeCell{
         width: 15px;
         height: 15px;
+    }
+    .material-symbols-outlined{
+        font-size: 40px;
+    }
+    .controlFlexBox{
+        display: flex;
+        flex-direction: column-reverse;
+    }
+    .moves{
+        margin: 10px 70px;
+        font-size: 16px;
+        text-align: center;
     }
 }
