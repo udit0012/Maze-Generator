@@ -335,7 +335,7 @@ const Maze = () => {
                                 </div>
                                 <h2 className='moves'>Moves : {moves}</h2>
                             </> : <>
-                                <div className='controlBox'><h1>You Win!</h1></div>
+                                <div className='win'><h1>Congratulations, You Win!</h1></div>
                             </>}
                         </div>
                     </div>}

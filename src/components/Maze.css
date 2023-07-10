@@ -210,6 +210,13 @@ body{
         display: flex;
         flex-direction: column-reverse;
     }
+    .controlBox{
+        margin: 0 20px;
+        text-align: center;
+    }
+    .win h1{
+        font-size: 23px;
+    }
     .moves{
         margin: 10px 70px;
         font-size: 16px;
