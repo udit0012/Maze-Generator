@@ -3,7 +3,7 @@ body{
     color: aqua;
 }
 .maze{
-    margin: 40px;
+    margin: 40px 0;
     margin-bottom: 0;
 }
 .head1{
@@ -168,7 +168,105 @@ body{
     margin-left: 16px;
     margin-right: 16px;
 }
-
+.footer{
+    background-color: rgb(5, 54, 54);
+    padding: 7em 0;
+    margin-top: 100px;
+}
+.footer-heading{
+    font-size: 30px;
+    margin-bottom: 70px;
+    color: white;
+    font-weight: 700;
+}
+.logo{
+    color: white;
+}
+.menu{
+    margin-bottom: 30px;
+    color: rgba(255, 255, 255, 0.3);
+}
+.menu a{
+    color: rgba(255, 255, 255, 0.6);
+    margin: 0 10px;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+    text-decoration: none;
+    transition: .2s ;
+}
+.menu a:hover{
+    color: rgba(255, 255, 255, 0.4);
+}
+.ftco-footer-social {
+    position: relative;
+    display: flex;
+    justify-content: center;
+}
+.ftco-footer-social .ftco-animate {
+    position: relative;
+    list-style: none;
+    margin: 0 20px;
+    cursor: pointer;
+}
+.ftco-footer-social .ftco-animate a  {
+    font-size: 30px;
+    width: 50px;
+    height: 50px;
+    display: inline-flex;
+    justify-content: center;
+    align-items: center;
+    color: white;
+    outline: 2px solid white;
+    border-radius: 50%;
+    text-decoration: none;
+    transition: .2s;
+}
+.ftco-footer-social .ftco-animate:hover a{
+    outline-offset: 4px;
+}
+.ftco-animate a i{
+    margin: auto;
+}
+.ftco-animate:hover a i{
+   animation: shake .2s;
+}
+.ftco-footer-social .ftco-animate:hover .instagram{
+    background-image: radial-gradient(
+		circle at 30% 107%,
+		#fdf497 0%,
+		#fdf497 5%,
+		#fd5949 45%,
+		#d6249f 60%,
+		#285aeb 90%
+	);
+	outline-color: #a02d76;
+}
+.ftco-footer-social .ftco-animate:hover .twitter{
+	background-color: #1da1f2;
+	outline-color: #1da1f2;
+}
+.ftco-footer-social .ftco-animate:hover .linkedin{
+	background-color: #0077b5;
+	outline-color: #0077b5;
+}
+.ftco-footer-social .ftco-animate:hover .github{
+	background-color: #2ea44f;
+	outline-color: #2ea44f;
+}
+@keyframes shake {
+    0%{
+        transform: rotate(15deg);
+    }
+    25%{
+        transform: rotate(-15deg);
+    }
+    50%{
+        transform: rotate(15deg);
+    }
+    100%{
+        transform: rotate(-15deg);
+    }
+}
 @media only screen and (max-width: 800px){
     .head1{
         font-size: 35px;

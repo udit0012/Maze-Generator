@@ -1,5 +1,7 @@
-import React, { useReducer, useState } from 'react'
+import React, { useEffect, useReducer, useState } from 'react'
 import "./Maze.css"
+import Typed from "typed.js"
+import { Link } from 'react-router-dom';
 
 type InputType = {
     row: number;
@@ -13,7 +15,7 @@ type gridType = {
     top: boolean;
     bottom: boolean;
     visited: boolean;
-    path:boolean;
+    path: boolean;
 }
 
 interface AppState {
@@ -79,7 +81,7 @@ const Maze = () => {
             top: false,
             bottom: false,
             visited: false,
-            path:false
+            path: false
         }]],
         error: "",
     })
@@ -91,7 +93,7 @@ const Maze = () => {
         top: false,
         bottom: false,
         visited: false,
-        path:false
+        path: false
     })
     const [moves, setMoves] = useState(0)
     const createAMaze = (e: React.FormEvent<HTMLFormElement>) => {
@@ -115,7 +117,7 @@ const Maze = () => {
                         top: false,
                         bottom: false,
                         visited: false,
-                        path:false
+                        path: false
                     }
                     rows.push(obj)
                 }
@@ -271,11 +273,25 @@ const Maze = () => {
         }
     }
     console.log("initial", iMazeBox);
+    const el = React.useRef(null)
+    useEffect(() => {
+        var type = new Typed(el.current, {
+            strings: ['Generator', 'Game'],
+            typeSpeed: 150,
+            backSpeed: 100,
+            loop: true
+        })
+        return () => {
+            type.destroy()
+        }
+    }, [])
+
+
     console.log("current", mazeBox);
 
     return (
         <div className='maze'>
-            <h1 className='head1'>Maze Generator</h1>
+            <h1 className='head1'>Maze <span ref={el}></span></h1>
             <div className='flexContainer'>
                 <div className='mazeContainer'>
                     <form className='mazeForm' onSubmit={createAMaze}>
@@ -291,8 +307,8 @@ const Maze = () => {
                     </form>
                 </div>
                 <div className='mazeFlexBox mt-10'>
-                    {loading&& <div className='notice'>Select the Maze size (2-20)</div> }
-                    {error&& <div className='notice'>{error}</div> }
+                    {loading && <div className='notice'>Select the Maze size (2-20)</div>}
+                    {error && <div className='notice'>{error}</div>}
                     {!loading && !error && <div className='mazeBox'>
                         {<div className='mazeBoxes'>
                             {mazeBox.length ? mazeBox.map((grid: gridType[]) => {
@@ -341,7 +357,36 @@ const Maze = () => {
                     </div>}
                 </div>
             </div>
-
+            <footer className="footer">
+                <div className="container">
+                    <div className="row justify-content-center">
+                        <div className="col-md-12 text-center">
+                            <h2 className="footer-heading"><a href="#" className="logo">Maze game</a></h2>
+                            <p className="menu">
+                                <Link to={"/Maze-Generator"}>Home</Link>
+                                <Link to={"/Maze-Generator"}>Agent</Link>
+                                <Link to={"/Maze-Generator"}>About</Link>
+                                <Link to={"/Maze-Generator"}>Listing</Link>
+                                <Link to={"/Maze-Generator"}>Blog</Link>
+                                <Link to={"/Maze-Generator"}>Contact</Link>
+                            </p>
+                            <ul className="ftco-footer-social p-0">
+                                <li className="ftco-animate"><Link to={"https://www.instagram.com/me_gotnochillz"} target='_blank'  className='instagram' ><i className="fab fa-instagram"></i></Link></li>
+                                <li className="ftco-animate"><Link to={"https://www.linkedin.com/in/udit-goyal-aa79a01a2"} target='_blank' className='linkedin'> <i className="fab fa-linkedin"></i></Link></li>
+                                <li className="ftco-animate"><Link to={"https://github.com/udit0012"} target='_blank' className='github'> <i className="fab fa-github"></i></Link></li>
+                                <li className="ftco-animate"><Link to={"https://twitter.com/uditgoyal0012"} target='_blank' className='twitter'> <i className="fab fa-twitter"></i></Link></li>
+                            </ul>
+                        </div>
+                    </div>
+                    <div className="row mt-5">
+                        <div className="col-md-12 text-center">
+                            <p className="copyright">
+                                Copyright © 2023 All rights reserved | This website is made with <i className="ion-ios-heart" aria-hidden="true"></i> by <a href="https://colorlib.com" target="_blank">Udit Goyal</a>
+                            </p>
+                        </div>
+                    </div>
+                </div>
+            </footer>
         </div>
     )
 }
