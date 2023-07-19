@@ -314,7 +314,7 @@ const Maze = () => {
                             {mazeBox.length ? mazeBox.map((grid: gridType[]) => {
                                 return <div className='mazeRow'>
                                     {grid.map((cell: gridType) => {
-                                        return <div className='mazeCell' style={{ transition: "1s", background: current.x === cell.x && current.y === cell.y ? "aqua" : "transparent", color: current.x === cell.x && current.y === cell.y ? "black" : "aqua", borderLeft: `${cell.left ? "1px solid transparent" : "1px solid aqua"}`, borderRight: `${cell.right ? "1px solid transparent" : "1px solid aqua"}`, borderBottom: `${cell.bottom ? "1px solid transparent" : "1px solid aqua"}`, borderTop: `${cell.top ? "1px solid transparent" : "1px solid aqua"}` }}>{cell.x === 0 && cell.y === 0 ? "S" : ""}{cell.x === input.row - 1 && cell.y === input.col - 1 ? "E" : ""}</div>
+                                        return <div className='mazeCell' style={{ transition: "1s", background: current.x === cell.x && current.y === cell.y ? "aqua" : "transparent", color: current.x === cell.x && current.y === cell.y ? "black" : "aqua", borderLeft: `${cell.left ? "1px solid transparent" : "1px solid aqua"}`, borderRight: `${cell.right ? "1px solid transparent" : "1px solid aqua"}`, borderBottom: `${cell.bottom ? "1px solid transparent" : "1px solid aqua"}`, borderTop: `${cell.top ? "1px solid transparent" : "1px solid aqua"}` }}>{cell.x === 0 && cell.y === 0 ? "S" : ""}{cell.x === input.row - 1 && cell.y === input.col - 1 ? "E" : ""} </div>
                                     })}
                                 </div>
                             }) : iMazeBox.map((grid: gridType[]) => {
@@ -381,7 +381,7 @@ const Maze = () => {
                     <div className="row mt-5">
                         <div className="col-md-12 text-center">
                             <p className="copyright">
-                                Copyright © 2023 All rights reserved | This website is made with <i className="ion-ios-heart" aria-hidden="true"></i> by <a href="https://colorlib.com" target="_blank">Udit Goyal</a>
+                                Copyright © 2023 All rights reserved | This website is made <i className="ion-ios-heart" aria-hidden="true"></i> by <a href="https://github.com/udit0012" target="_blank">Udit Goyal</a>
                             </p>
                         </div>
                     </div>
